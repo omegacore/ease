@@ -16,12 +16,28 @@
 	
 	<!-- Local compiled JavaScript -->
 	<script src="{% static 'dist-bootstrap-4.0.0/js/bootstrap.min.js' %}"></script>
-
+  
   <style>
     body {
-      padding-top: 1em;
+      padding-top:1em;
     }
+    .titles {
+      color: blue;
+    }
+	
+	#home_page_title {
+	  color: black;
+	  text-align: center
+	}
+	
+	#home_page_image {
+	  max-width: 40%;
+	  max-height: 40%;
+	}
   </style>
+  
+
+
 
   {% block head_extra %}
   {% endblock %}

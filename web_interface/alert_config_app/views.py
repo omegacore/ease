@@ -4,7 +4,7 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 
 from account_mgr_app.models import Profile
-from .models import Alert, Pv, Trigger
+from .models import Alert, Pv, Trigger #Does this allow you to say "model = Pv....model = Alert..."
 from .forms import configAlert, configTrigger, deleteAlert, subscribeAlert, createPv
 
 from django.contrib.auth.decorators import login_required

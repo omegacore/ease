@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_extra %}
+{% load static %}
+<script src="{% static 'dynamic_forms.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+<h1 id="home_page_title"> EASE Home </h1>
+{% endblock %}
+
+
+{% block content %}
+<center> <img id="home_page_image" src="{% static 'new/test.png' %}" alt="Stanford SLAC EASE" /> </center>
+{% endblock %}
