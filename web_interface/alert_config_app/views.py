@@ -1,3 +1,8 @@
+"""Django consults this page to determine the html that should be sent
+ to the user
+"""
+
+
 from django.shortcuts import render
 
 from django.views import generic

@@ -4,3 +4,4 @@
 .vscode
 secret_key.py
 db.sqlite3
+docs/_build/*
