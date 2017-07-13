@@ -84,7 +84,7 @@ class Trigger(models.Model):
             self.name, 
             self.alert,
             self.value,
-            sefl.compare,
+            self.compare,
         )
 
     def __str__(self):
