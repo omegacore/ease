@@ -1,11 +1,6 @@
-language: python 
-python: 
+language: python
+python:
   - "3.6"
-
-env:
-  global:
-    - OFFICIAL_REPO="slaclab/ease"
-    - secure: "QNHJ6xXlJkCp3ZGoDZjFySIOIdV3MU3d1Rs2ZzduQjjRTrouDIM5sOcYG6yF3WXgD9+yi3KaiUWh/j8SwpwLgzWuj+8uoHSftxogjsJMqPc3P6lU1Q/jvEkdalt3cAR7Xk1VxPK7S66H69J2wNtxuWQ4yzkd/jbwxLorr2FhbtMfbz3MmLma+44JZS6efAPgHwyor2fEwcT2XcjXRzfhRCde4jT6sp8PJBWxHFtahqVuLaNW0PrymbyVMGJm8tBqpFQoy/Bnl/NGtoSlysRzq1ZrL52wSxyJn8GcLx6h0WX75Ow1DamwW5wvkBDsrNB/KoZvdzzyLovQIYqnEWMf/565NAZNioYBERnNkDxWNab9eksuk21M+blyJjH5J4C2NziGGclGiaulbSBFe7EK6Sef/W+cg6K/IIGFA2laEDx1ZtGFCyGooFF0ttvuoEerdJi6jCVWyXCAiqS5Cee6o3o1Z8TBEqCfD3RjQ1OeLMZS65h1UOiXYt3iBkWbhla512eSoN4+Aewn52iAu2vGm85kWQlj0N+OtYL5BrV9ZcixVvF1Enq3aecONwkGoQEHqNLopFMMxVA+pUBha0p+D80n7gI2xSe/fowpBR463uHiibhfuJkJ92VLS+34NfWRsiU/ugwBCcnLn7RSYIlwm7tbU00ZoFbqvbfXF0BI1U8=" 
 
 sudo: false
 
@@ -38,15 +33,6 @@ script:
   - cd alerts_engine
   - coverage run run_tests.py
   - cd ../
-  - |
-    if [[ $TRAVIS_REPO_SLUG == $OFFICIAL_REPO ]]; then
-      set -e
-      pip install doctr
-      cd docs
-      make html
-      cd ../
-      doctr deploy . --built-docs docs/_build/html
-    fi
 
 after_success:
   - coverage combine alerts_engine/.coverage web_interface/.coverage
