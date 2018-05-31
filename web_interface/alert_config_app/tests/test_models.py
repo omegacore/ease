@@ -61,40 +61,4 @@ class AlertFieldsTests(TestCase):
     def tearDownClass(cls):
         super().tearDownClass()
 
-class PVFieldsTests(TestCase):
-    """Ensure that Alert Fields exist 
-    """
-    @classmethod
-    def setUpTestData(cls):
-        p = Pv.objects.create(
-            name="unittest_pv",
-        )
 
-    def setUp(self):
-        # print("setUp: Run once for every test method to setup clean data.")
-        pass
-
-    def test_field_name(self):
-        """Ensure name field exists
-        """
-        pv = Pv.objects.get(name="unittest_pv")
-        field_label = pv._meta.get_field('name').verbose_name
-        self.assertEquals(field_label,'name')
-
-    @expectedFailure
-    def test_multi_user(self):
-        """Ensure that PVs are unique
-        """
-        with self.assertRaises(IntegrityError):
-            p = Pv.objects.create(
-                name="unittest_pv",
-            )
-
-    def tearDown(self):
-        #Clean up run after every test method.
-        pass
-    
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-        pass

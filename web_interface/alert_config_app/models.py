@@ -81,23 +81,6 @@ class Alert(models.Model):
         return(str(self.name))
 
 
-class Pv(models.Model):
-    """Each PV instance is made to match with an EPICS PV.
-
-    Alerts engine consults the table of PVs to decide which
-    entries much be queried from the archiver
-    """
-    name_max_length = 100
-    name = models.CharField(max_length = name_max_length)
-    
-
-    def __repr__(self):
-        return "{}(name={},)".format(self.__class__.__name__, self.name)
-
-    def __str__(self):
-        return(str(self.name))
-
-
 class Trigger(models.Model):
     """Individual 'trip statemet'
     

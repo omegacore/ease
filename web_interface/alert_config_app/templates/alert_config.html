@@ -12,7 +12,7 @@
 
 {% block script %}
 	var dfc_prefix = "tg"
-	var dfc_fields = ["new_name","new_pv","new_compare","new_value","new_modal"]
+	var dfc_fields = ["new_name","new_value_src","new_compare","new_value","new_modal"]
 	var dfc_replace = ["",null,1,"",""]
 
 	var name_list
@@ -127,9 +127,9 @@
 				{% for entry in triggerForm %}
 					<tr>
 						<td class="w-30">{{ entry.new_name }}</td>
-						<td class="w-10">{{ entry.new_pv }}
+						<td class="w-10">{{ entry.new_value_src }}
 							<!--  Search and add PVs  -->
-							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchAndAddPVsModal" data-id={{ entry.new_pv.html_name }} >Search and Add PVs</button>
+							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchAndAddPVsModal" data-id={{ entry.new_value_src.html_name }} >Search and Add PVs</button>
 						</td>
 						<td class="w-10">{{ entry.new_compare }}</td>
 						<td class="w-20">{{ entry.new_value }}</td>

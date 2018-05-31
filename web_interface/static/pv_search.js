@@ -8,7 +8,7 @@ var viewerVars = {};// This is one of the integration points with the server.
 // To develop/debug, override this to a absolute URL of the server with the data you are going to use for debugging/developing.
 viewerVars.serverURL = "https://pswww.slac.stanford.edu/archiveviewer/retrieval";
 //Set up an ssh tunnel to pslogin -L 8700:pswww.slac.stanford.edu:80
-viewerVars.serverURL = "http://localhost:8700/archiveviewer/retrieval";//remote work with port forwarding
+// viewerVars.serverURL = "http://localhost:8700/archiveviewer/retrieval";//remote work with port forwarding
 
 // User typed a pattern, we search for PV's matching this pattern.
 

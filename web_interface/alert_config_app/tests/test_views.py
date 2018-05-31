@@ -173,15 +173,15 @@ class test_alert_config_view(TestCase):
                    "new_subscribe":                             "on",
                 "tg-0-new_compare":                             "<=",
                    "tg-0-new_name":                      "0 trigger",
-                     "tg-0-new_pv":                             "-1",
+                     "tg-0-new_value_src":                             "-1",
                   "tg-0-new_value":                            "100",
                 "tg-1-new_compare":                             "==",
                    "tg-1-new_name":                      "1 trigger",
-                     "tg-1-new_pv":                             "-1",
+                     "tg-1-new_value_src":                             "-1",
                   "tg-1-new_value":                              "7",
                 "tg-2-new_compare":                             "-1",
                    "tg-2-new_name":                               "",
-                     "tg-2-new_pv":                             "-1",
+                     "tg-2-new_value_src":                             "-1",
                   "tg-2-new_value":                               "",
                 "tg-INITIAL_FORMS":                              "0",
                 "tg-MAX_NUM_FORMS":                           "1000",
@@ -211,7 +211,7 @@ class test_alert_config_view(TestCase):
         try:
             alert_inst = Alert.objects.get(name="alert_name")
         except Exception as E:
-            #print(E)
+            print(E)
             self.fail("Alert not created")
          
         # confirm that the user is added as the owner

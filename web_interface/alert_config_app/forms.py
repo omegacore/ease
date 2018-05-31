@@ -13,7 +13,7 @@ ____
 """
 
 from django import forms
-from .models import Alert, Pv, Trigger#, PVname
+from .models import Alert, Trigger
 from account_mgr_app.models import Profile
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
@@ -27,9 +27,8 @@ class configTrigger(forms.Form):
 
     Attributes
     __________
-        new_pv : forms.ChoiceField
-            Provides dropdown selection of PV's to link to this trigger. This 
-            attr is defined in the __init__ due to its reliance on DB items.
+        new_value_src : forms.CharField
+            String specifying data source(s)
 
         new_compare : forms.ChoiceField
             Describes the comparison operation between the PV's value and 
@@ -47,8 +46,8 @@ class configTrigger(forms.Form):
         """
         super().__init__(*args,**kwargs)
 
-        self.fields['new_pv'] = forms.CharField(
-            label = 'PV name',
+        self.fields['new_value_src'] = forms.CharField(
+            label = 'Value source',
             widget = forms.HiddenInput()
         )
     
@@ -119,8 +118,8 @@ class configTrigger(forms.Form):
             raise forms.ValidationError(
                 "Usernames "+error_msg+"Not recognized"
             )'''
-    def clean_new_pv(self):
-        data = self.cleaned_data['new_pv']
+    def clean_value_src(self):
+        data = self.cleaned_data['value_src']
         if data == str(-1):
             data = None
         #add in some checks for a PV tag
@@ -345,24 +344,6 @@ class detailAlert(forms.Form):
         return data
     
     
-class createPv(forms.ModelForm):
-    class Meta:
-        model = Pv
-        fields = ['new_name']
-
-    new_name = forms.CharField(
-        label = 'PV name',
-        max_length = Pv.name_max_length,
-        widget = forms.TextInput( 
-            attrs = {
-                'class':'form-control',
-                'type':'text',
-            }
-        )
-    )
-    # forms.ModelForm.Meta.fields.append(new_name)
-     
-
 class deleteAlert(forms.Form):
     class Meta:
         model = Alert

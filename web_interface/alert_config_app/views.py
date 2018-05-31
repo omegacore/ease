@@ -13,8 +13,8 @@ from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 
 from account_mgr_app.models import Profile
 import account_mgr_app
-from .models import Alert, Pv, Trigger 
-from .forms import configAlert, configTrigger, deleteAlert, detailAlert, createPv
+from .models import Alert, Trigger 
+from .forms import configAlert, configTrigger, deleteAlert, detailAlert
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -49,7 +49,6 @@ def list_all(request):
     django.http.HttpResponse
     """
     context = {}
-    context['pv_list'] = Pv.objects.all()
     context['alert_list'] = Alert.objects.all()
     context['user'] = request.user
     return render( request, 'debug_list_all.html', context)
@@ -93,79 +92,6 @@ class alerts_all(generic.ListView):
         if query:
             new_context = new_context.filter(name__icontains=query)#
         return new_context
-
-
-@method_decorator(login_required, name = 'dispatch')
-class pvs_all(generic.ListView):
-    """Draws page listing all PVs. Handles pagination.
-    
-    Attributes
-    __________
-        template_name : string
-            Determines the .html in aler_config_app/templates to use.
-
-        paginate_by : int
-            number of PVs per page
-    """
-    model = Pv
-    template_name = 'pvs_all.html'
-    paginate_by = 30
-
-    def get_queryset(self):
-        """Organizes the Pvs Alphabetically
-        """
-        new_context = Pv.objects.all().order_by('name')
-        query = self.request.GET.get("q")
-        if query:
-            new_context = new_context.filter(name__icontains=query) 
-        return new_context
-
-
-@method_decorator(login_required, name = 'dispatch')
-class pv_detail(generic.DetailView, UpdateView):
-    model = Pv
-    context_object_name='pv'
-    template_name = 'pv_detail.html'
-    form_class = createPv
-    success_url = reverse_lazy('pvs_page_all')
-    def form_valid(self,form):
-        # form.cleaned_data.get('new_name')
-        form.instance.name = form.cleaned_data.get('new_name')
-        form.save()
-        return super().form_valid(form)
-
-
-@method_decorator(login_required, name = 'dispatch')
-class pv_delete(DeleteView):
-    model = Pv
-    template_name = 'pv_delete.html'
-    success_url = reverse_lazy('pvs_page_all')
-
-
-@method_decorator(login_required, name = 'dispatch')
-class pv_create(generic.edit.CreateView):
-    """Draws page for PV creation
-    
-    Attributes
-    __________
-        template_name : string
-            Determines the .html in aler_config_app/templates to use.
-
-    """
-    model = Pv
-    template_name = 'pv_create.html'
-    form_class = createPv
-    success_url = reverse_lazy('pvs_page_all')
-    def form_valid(self,form):
-        """
-        Receives and processes the form
-        
-        """
-        # form.cleaned_data.get('new_name')
-        form.instance.name = form.cleaned_data.get('new_name')
-        form.save()
-        return super(pv_create, self).form_valid(form)
-
 
 @method_decorator(login_required, name = 'dispatch')
 class alert_detail(View):
